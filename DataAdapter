@@ -1,0 +1,39 @@
+package com.example.basedate_01;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+
+public class DataAdapter extends RecyclerView.Adapter<ViewHolder>
+{
+    ArrayList<String> messages;//которое будет наши строки
+    LayoutInflater inflater;
+    public DataAdapter(Context context, ArrayList<String> messages)
+    {
+        this.messages = messages;
+        this.inflater = LayoutInflater.from(context);//мы присвоим результат работы
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {//возвращает наш ViewHolder.Java и задаем объект
+       View view = inflater.inflate(R.layout.item_message, parent, false);
+       return new ViewHolder(view);
+    }
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+            //этот метод отвечает за прокрутку
+    {
+        String msg = messages.get(position);
+        holder.message.setText(msg);
+        //я присваиваю обе объекта для прокрутки
+    }
+    @Override
+    public int getItemCount()
+    {
+        return messages.size();//чтобы он мог корректно отображать нашу ленту
+    }
+}
